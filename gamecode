@@ -1,0 +1,228 @@
+csharp
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class DialogueManager : MonoBehaviour
+{
+    // UI elements for displaying dialogue
+    public GameObject dialoguePanel;
+    public UnityEngine.UI.Text dialogueText;
+
+
+    // Method to start dialogue with another character
+    public void StartDialogue(Transform otherCharacter)
+    {
+        // Display character's name and dialogue
+        string characterName = otherCharacter.name;
+        string dialogue = GetDialogue(characterName);
+        
+        // Show the dialogue panel and update text
+        dialoguePanel.SetActive(true);
+        dialogueText.text = dialogue;
+
+
+        // Optionally, add logic to hide dialogue after a delay or on input
+        Invoke("HideDialogue", 5f); // Hide after 5 seconds for demo purpose
+    }
+
+
+    private string GetDialogue(string characterName)
+    {
+        
+        switch (characterName)
+        {
+            case "CharacterA":
+                return "Hello, I'm Character A!";
+            case "CharacterB":
+                return "Hi there! I'm Character B.";
+            default:
+                return "Nice to meet you!";
+        }
+    }
+
+
+    private void HideDialogue()
+    {
+        dialoguePanel.SetActive(false);
+    }
+}
+
+
+
+
+public class PlayerInteraction : MonoBehaviour
+{
+    public float interactionDistance = 2f; 
+    public LayerMask interactableLayer; 
+
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E)) //  E is interaction key
+        {
+            InteractWithObjects();
+
+
+        }
+    }
+
+
+    private void InteractWithObjects()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.forward, out hit, interactionDistance, interactableLayer))
+        {
+            IInteractable interactable = hit.collider.GetComponent<IInteractable>();
+            if (interactable != null)
+            {
+                interactable.Interact(); // Call the interact method
+            }
+        }
+    }
+
+
+
+
+public interface IInteractable
+{
+    void Interact();
+}
+
+
+public class Book : MonoBehaviour, IInteractable
+{
+    public void Interact()
+    {
+        // Logic for opening the book
+        OpenBook();
+    }
+
+
+    private void OpenBook()
+    {
+        Debug.Log("You opened the book!");
+        // Add your logic to display book content here
+    }
+
+
+    public void ShelveBook()
+    {
+        Debug.Log("You shelved the book!");
+        // Logic to shelve the book
+    }
+}
+
+
+public class InventorySystem : MonoBehaviour
+{
+    private List<Book> books = new List<Book>(); // List to hold the player's books
+
+
+    public void AddBook(Book book)
+    {
+        books.Add(book);
+        Debug.Log($"Added {book.bookTitle} to inventory.");
+    }
+
+
+    public void ShelveBook(Book book)
+    {
+        if (books.Contains(book))
+        {
+            book.ShelveBook();
+        }
+        else
+        {
+            Debug.Log("Book not found in inventory.");
+        }
+    }
+
+
+public void HideBook(Book book)
+    {
+        if (books.Contains(book))
+        {
+            book.HideBook();
+        }
+        else
+        {
+            Debug.Log("Book not found in inventory.");
+        }
+    }
+}
+
+
+public class Book : MonoBehaviour, IInteractable
+{
+    public string bookTitle; // Title of the book for reporting
+    private bool isShelved = false; // Flag for whether the book is shelved
+
+
+    public void Interact()
+    {
+        // Logic for opening a menu or performing actions
+        ShowBookOptions();
+    }
+
+
+    private void ShowBookOptions()
+    {
+        // Here you would normally show a UI with options like "Shelve", "Report", "Hide"
+        Debug.Log($"Options for {bookTitle}: Shelve, Report, Hide");
+        
+        // Example calls to the respective actions (you would call these based on user input)
+        // ShelveBook(); // Uncomment based on user selection
+        // ReportBook(); // Uncomment based on user selection
+        // HideBook(); // Uncomment based on user selection
+    }
+
+
+    public void ShelveBook()
+    {
+        if (!isShelved)
+        {
+            isShelved = true;
+            Debug.Log($"{bookTitle} has been shelved!");
+            // Add logic to visually shelve the book (e.g., move it to a different parent)
+        }
+        else
+        {
+            Debug.Log($"{bookTitle} is already shelved.");
+        }
+    }
+
+
+    public void ReportBook()
+    {
+        Debug.Log($"Reporting {bookTitle}...");
+        // Logic to report the book (e.g., send information to a server or log it)
+    }
+
+
+    public void HideBook()
+    {
+        Debug.Log($"Hiding {bookTitle}...");
+        // Logic to hide the book, e.g., disable game object or change its visibility
+        gameObject.SetActive(false);
+    }
+}
+
+
+public class Note : MonoBehaviour, IInteractable
+{
+    public void Interact()
+    {
+        // Logic for opening the note
+        OpenNote();
+    }
+
+
+    private void OpenNote()
+    {
+        Debug.Log("You opened the note!");
+        // Add your logic to display note content here
+    }
+}
+
+
