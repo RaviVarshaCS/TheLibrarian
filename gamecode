@@ -225,4 +225,124 @@ public class Note : MonoBehaviour, IInteractable
     }
 }
 
+public class XPManager : MonoBehaviour
+{
+    // XP values for different tasks
+    private const int DAILY_TASK_XP = 10;
+    private const int DANGEROUS_BOOK_XP = 10;
+    private const int RESTRICTING_BOOK_XP = 5;
+    private const int HIDING_BOOK_XP = 5;
+
+
+    // XP values for relationships
+    private const int SHELVING_WANTED_BOOK_XP = 10;
+    private const int RESTRICTING_WANTED_BOOK_XP = 10;
+    private const int HIDING_WANTED_BOOK_XP = 5;
+
+
+    // Current XP values
+    private int reputationXP = 0;
+    private int relationshipXP = 0;
+
+
+    // Experience thresholds for leveling up
+    private const int LEVEL_UP_THRESHOLD = 100; // Customize as needed
+
+
+    // UI References
+    [SerializeField] private Slider reputationSlider;
+    [SerializeField] private Slider relationshipSlider;
+    [SerializeField] private Text reputationText;
+    [SerializeField] private Text relationshipText;
+
+
+    private void Start()
+    {
+        UpdateUI(); // Initialize UI
+    }
+
+
+    public void CompleteDailyTasks()
+    {
+        AddReputationXP(DAILY_TASK_XP);
+        // Add other daily tasks here
+    }
+
+
+    public void ShelveDangerousBook(bool hasSufficientRelationship)
+    {
+        if (hasSufficientRelationship)
+        {
+            AddReputationXP(DANGEROUS_BOOK_XP);
+        }
+    }
+
+
+    public void RestrictBook()
+    {
+        AddReputationXP(RESTRICTING_BOOK_XP);
+    }
+
+
+    public void HideBook()
+    {
+        AddReputationXP(HIDING_BOOK_XP);
+    }
+
+
+    public void ShelveWantedBook()
+    {
+        AddRelationshipXP(SHELVING_WANTED_BOOK_XP);
+    }
+
+
+    public void RestrictWantedBook()
+    {
+        AddRelationshipXP(RESTRICTING_WANTED_BOOK_XP);
+    }
+
+
+    public void HideWantedBook()
+    {
+        AddRelationshipXP(HIDING_WANTED_BOOK_XP);
+    }
+
+
+    private void AddReputationXP(int amount)
+    {
+        reputationXP += amount;
+        CheckLevelUp(ref reputationXP);
+        UpdateUI();
+    }
+
+
+    private void AddRelationshipXP(int amount)
+    {
+        relationshipXP += amount;
+        CheckLevelUp(ref relationshipXP);
+        UpdateUI();
+    }
+
+
+    private void CheckLevelUp(ref int xp)
+    {
+        if (xp >= LEVEL_UP_THRESHOLD)
+        {
+            xp -= LEVEL_UP_THRESHOLD; // Reset XP after leveling up
+            // Handle level up logic (e.g., increase player level, show notification)
+        }
+    }
+
+
+    private void UpdateUI()
+    {
+        reputationSlider.value = (float)reputationXP / LEVEL_UP_THRESHOLD;
+        reputationText.text = $"{reputationXP} / {LEVEL_UP_THRESHOLD} XP";
+
+
+        relationshipSlider.value = (float)relationshipXP / LEVEL_UP_THRESHOLD;
+        relationshipText.text = $"{relationshipXP} / {LEVEL_UP_THRESHOLD} XP";
+    }
+}
+
 
