@@ -4,11 +4,11 @@ public class CharacterMovement : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public float turnSpeed = 100f;
-    private CharacterController controller;
+    // private CharacterController controller;
     
     void Start()
     {
-        controller = GetComponent<CharacterController>();
+        // controller = GetComponent<CharacterController>();
     }
 
     void Update()
@@ -22,9 +22,9 @@ public class CharacterMovement : MonoBehaviour
 
         // Move character forward in its facing direction
         Vector3 forward = transform.forward * vertical * moveSpeed * Time.deltaTime;
-        if (controller.isGrounded)
-            {
-                controller.Move(forward);
-            }
+        // if (controller.isGrounded)
+        //     {
+        //         controller.Move(forward);
+        //     }
     }
 }

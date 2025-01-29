@@ -20,15 +20,18 @@ public class ThirdPersonController : MonoBehaviour
     private float currentRotation;
     private Vector3 currentCameraPosition;
     private bool isFirstFrame = true;
+    
+    private Animator animator; // Reference to Animator
 
     private void Start()
     {
         characterController = GetComponent<CharacterController>();
         cameraTransform = Camera.main.transform;
-        
+        animator = GetComponent<Animator>(); // Get Animator component
+
         // Initialize rotation to match current Y rotation
         currentRotation = transform.eulerAngles.y;
-        
+
         // Initialize camera position
         currentCameraPosition = transform.position + transform.rotation * cameraOffset;
         cameraTransform.position = currentCameraPosition;
@@ -56,7 +59,9 @@ public class ThirdPersonController : MonoBehaviour
         // Get input values
         float verticalInput = Input.GetAxis("Vertical");    // Up/Down arrows or W/S
         float horizontalInput = Input.GetAxis("Horizontal"); // Left/Right arrows or A/D
-        
+
+        bool isWalking = verticalInput != 0 || horizontalInput != 0; // Check if player is moving
+
         // Handle rotation with smoothing
         if (horizontalInput != 0)
         {
@@ -64,13 +69,16 @@ public class ThirdPersonController : MonoBehaviour
             currentRotation += rotationDelta;
             transform.rotation = Quaternion.Euler(0f, currentRotation, 0f);
         }
-        
+
         // Handle forward/backward movement
         if (verticalInput != 0)
         {
             Vector3 moveDirection = transform.forward * verticalInput;
             characterController.Move(moveDirection * moveSpeed * Time.deltaTime);
         }
+
+        // Set animation state
+        animator.SetBool("isWalking", isWalking);
     }
 
     private void ApplyGravity()
@@ -91,16 +99,20 @@ public class ThirdPersonController : MonoBehaviour
     {
         // Calculate the desired camera position based on player's position and rotation
         Vector3 desiredPosition = transform.position + transform.rotation * cameraOffset;
-        
+
         // Smoothly move the camera
         currentCameraPosition = Vector3.Lerp(currentCameraPosition, desiredPosition, cameraSmoothSpeed * Time.deltaTime);
-        
+
         // Update camera position and make it look at the player
         cameraTransform.position = currentCameraPosition;
-        
+
         // Smoothly rotate the camera
         Vector3 lookDirection = (transform.position + Vector3.up) - cameraTransform.position;
         Quaternion targetRotation = Quaternion.LookRotation(lookDirection);
         cameraTransform.rotation = Quaternion.Slerp(cameraTransform.rotation, targetRotation, cameraSmoothSpeed * Time.deltaTime);
     }
+
+
+
+    
 }

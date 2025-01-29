@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d64e5fd156bc4ab4bcbfd7bb6c8c552, type: 3}
+  m_Name: Day3
+  m_EditorClassIdentifier: 
+  shelvingBooks:
+  - {fileID: 11400000, guid: 3def8adc887b64e7fbf9a17338ba76f0, type: 2}
+  - {fileID: 11400000, guid: fff58d4a6ee944502a27e433e399b9b3, type: 2}
+  - {fileID: 11400000, guid: 9144583b79c3149529e094d4791278a4, type: 2}
+  loanRequests:
+  - {fileID: 11400000, guid: 8161ba663cd7b46ad8dc9637a307ba76, type: 2}
+  - {fileID: 11400000, guid: 10953d94d965944c6bc9fa1f6435431d, type: 2}

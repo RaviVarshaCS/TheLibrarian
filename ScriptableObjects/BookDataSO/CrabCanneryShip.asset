@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3b32b63dd2c4420cbbc2a859953e913, type: 3}
+  m_Name: CrabCanneryShip
+  m_EditorClassIdentifier: 
+  bookTitle: Crab Cannery Ship
+  reputationScore: -10
+  bookPages:
+  - {fileID: 21300000, guid: f7c72615aa750422388835a19fc72ed1, type: 3}
+  - {fileID: 21300000, guid: 6af4022644bcc45faaec35597ca5d74e, type: 3}
