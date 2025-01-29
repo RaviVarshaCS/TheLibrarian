@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3b32b63dd2c4420cbbc2a859953e913, type: 3}
+  m_Name: ANarrowRoadtotheDeepNorth
+  m_EditorClassIdentifier: 
+  bookTitle: A Narrow Road to the Deep North
+  reputationScore: 10
+  bookPages:
+  - {fileID: 21300000, guid: 3b41b4891143543f2aa41f0612e3f30f, type: 3}
+  - {fileID: 21300000, guid: 2910d2f453b374f00bc7937fa65b207b, type: 3}

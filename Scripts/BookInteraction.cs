@@ -4,9 +4,12 @@ using System.Collections;
 
 public class BookInteraction : MonoBehaviour
 {
+    [SerializeField] private BookDataSO bookDataSO;
+
     public Transform centerPosition; // Position in the center
     public float moveSpeed = 5f;
     public GameObject readableViewUI; // UI or object for readable view
+    public int bookOrder; // Order of the book on the desk
     public Button publicButton; // Reference to public button
     public Button restrictedButton; // Reference to restricted button
 
@@ -36,8 +39,26 @@ public class BookInteraction : MonoBehaviour
         }
     }
 
-    public void OnMouseDown()
+    public void SetBookData(BookDataSO bookData)
     {
+        bookDataSO = bookData;
+    }
+
+    public void InteractWithBook()
+    {
+        // if (bookOrder == expectedOrder)
+        // {
+            // Book clicked in the correct order
+            OnCorrectOrderClick();
+    }
+
+    private void OnCorrectOrderClick()
+    {
+        //TODO: probably should check if data loaded??
+
+
+        readableViewUI.GetComponentInChildren<Book>().SetBookPages(bookDataSO.bookPages);
+
         // Prevent interaction if cooldown hasn't passed
         if (Time.time - lastInteractionTime < interactionCooldown)
         {
@@ -111,6 +132,7 @@ public class BookInteraction : MonoBehaviour
     private void OnPublicButtonClick()
     {
         Debug.Log("Public Button Clicked!");
+        PlayerReputation.Instance.UpdateReputation(bookDataSO.reputationScore);
         RemoveBookFromDesk();
         CloseReadableView();  // Close the readable view when a button is clicked
     }
@@ -119,6 +141,8 @@ public class BookInteraction : MonoBehaviour
     private void OnRestrictedButtonClick()
     {
         Debug.Log("Restricted Button Clicked!");
+        int reputationValue = bookDataSO.reputationScore * -1;
+        PlayerReputation.Instance.UpdateReputation(reputationValue);
         RemoveBookFromDesk();
         CloseReadableView();  // Close the readable view when a button is clicked
     }
@@ -128,6 +152,7 @@ public class BookInteraction : MonoBehaviour
     {
         if (isAtCenter) // Only move the book that is at the center
         {
+            Debug.Log("Book removed from desk.");
             // Move the book off the screen or disable it
             transform.position = new Vector3(1000, 1000, 1000); // Move it off-screen
             gameObject.SetActive(false); // Alternatively, hide the book (disable rendering)
