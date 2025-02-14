@@ -420,6 +420,13 @@
 -analyzer:"/Applications/Unity/Hub/Editor/6000.0.36f1/Unity.app/Contents/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
 -analyzer:"/Applications/Unity/Hub/Editor/6000.0.36f1/Unity.app/Contents/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 -analyzer:"/Applications/Unity/Hub/Editor/6000.0.36f1/Unity.app/Contents/Tools/Unity.SourceGenerators/Unity.UIToolkit.SourceGenerator.dll"
+"Assets/Scripts/BookData.cs"
+"Assets/Scripts/BookDatabase.cs"
+"Assets/Scripts/GameManager.cs"
+"Assets/Scripts/Note.cs"
+"Assets/Scripts/NoteData.cs"
+"Assets/Scripts/Shelving.cs"
+"Assets/Scripts/Talking.cs"
 "Assets/TutorialInfo/Scripts/Readme.cs"
 -langversion:9.0
 /deterministic
