@@ -1,11 +1,11 @@
-# Ignore everything in dev-playable except essential Unity files
-dev-playable/Library/
-dev-playable/Temp/
-dev-playable/Logs/
-dev-playable/UserSettings/
-dev-playable/MemoryCaptures/
-dev-playable/Build/
-dev-playable/Builds/
+# Ignore everything in Dev-Playable except essential Unity files
+Dev-Playable/Library/
+Dev-Playable/Temp/
+Dev-Playable/Logs/
+Dev-Playable/UserSettings/
+Dev-Playable/MemoryCaptures/
+Dev-Playable/Build/
+Dev-Playable/Builds/
 
 # OS-specific files
 .DS_Store
@@ -13,14 +13,14 @@ Thumbs.db
 
 # IDE-specific files (Visual Studio, Rider)
 .vscode/
-dev-playable/*.csproj
-dev-playable/*.sln
-dev-playable/*.unityproj
-dev-playable/*.user
-dev-playable/*.suo
-dev-playable/*.pidb
-dev-playable/*.booproj
-dev-playable/*.svd
+Dev-Playable/*.csproj
+Dev-Playable/*.sln
+Dev-Playable/*.unityproj
+Dev-Playable/*.user
+Dev-Playable/*.suo
+Dev-Playable/*.pidb
+Dev-Playable/*.booproj
+Dev-Playable/*.svd
 
 # Cache and local settings
-dev-playable/obj/
+Dev-Playable/obj/
