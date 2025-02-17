@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;  // Required for button interaction
 using System.Collections;
+using System.Collections.Generic;
 
 /*
 To-Do: Split the buttons -> one for moving book to center of desk, one for opening Reading Panel.
@@ -13,7 +14,6 @@ public class Shelving : MonoBehaviour
     public Transform centerPosition; 
     public float moveSpeed = 5f;
     public GameObject readableViewUI; 
-    public int bookOrder; 
     public Button publicButton; 
     public Button restrictedButton; 
     
@@ -25,24 +25,13 @@ public class Shelving : MonoBehaviour
     private Vector3 originalPosition;
     private float interactionCooldown = 0.2f; // Cooldown time in seconds
     private float lastInteractionTime = 0f;
-    public List<bookData> currDayData;
+    public List<BookData> currDayData;
     public Button openBook;
-    public int currentBook = 1;
+    public int currentBook = 0;
 
 
     private void Start()
     {
-        // manage shelving books
-        for (int i = 0; i < books.Length; i++)
-        {
-            BookComponent bookComponent = books[i].GetComponent<BookComponent>();
-            if (bookComponent == null)
-            {
-                Debug.LogError($"Book {books[i].name} is missing a BookComponent!");
-                continue;
-            }
-            
-        }
 
         originalPosition = transform.position;
         if (readableViewUI != null)
@@ -67,7 +56,6 @@ public class Shelving : MonoBehaviour
             
         }
 
-
         // set up all the data for the books, updates on each load of the scene
         getAllDayContents();
 
@@ -76,20 +64,19 @@ public class Shelving : MonoBehaviour
 
     public void getAllDayContents() {
         // get current shelving data
-        int runningDay = GameManager.currDay();
-        currDayData = BookDatabase.GetShelvingBooksForDay(runningDay);
+        int runningDay = GameManager.Instance.currDay();
+        currDayData = BookDatabase.Instance.GetShelvingBooksForDay(runningDay);
+        Debug.Log("All Day contents received");
 
-        // set data for each game object
-        for(int i = 0; i < currDayData.Length(); i++) {
-            books[i].GetComponent<BookComponent>().SetBookData(currDayData[i]);
-        }
     }
 
 
     public void OnOpenBookClick()
-    {   
-        if(currentBook <= 3) {
-            readableViewUI.GetComponentInChildren<Book>().SetBookPages(currDataData[currentBook].sprites);
+    { 
+        Debug.Log("Open book button clicked!");
+        if(currentBook <= 2) {
+            readableViewUI.GetComponentInChildren<Book>().SetBookPages(currDayData[currentBook].sprites);
+            Debug.Log("Fetched next book -> " + currDayData[currentBook].bookName);
         } else {
             return;
         }
@@ -100,9 +87,7 @@ public class Shelving : MonoBehaviour
         }
         lastInteractionTime = Time.time;
 
-        if(!isAtCenter) { // Move book to center
-            MoveToCenter();
-        } else if (!isInReadableView) { // On second click, open reading panel
+        if (!isInReadableView) { // On second click, open reading panel
             OpenReadableView();
         }  else {
             return;
@@ -122,14 +107,16 @@ public class Shelving : MonoBehaviour
         Vector3 targetPosition = centerPosition.position;
 
         // Move the book to the center position
-        while (timeElapsed < 1f)
+        while (timeElapsed < 1f && currentBook <= 2)
         {
-            transform.position = Vector3.Lerp(startPosition, targetPosition, timeElapsed);
-            timeElapsed += Time.deltaTime * moveSpeed;
+            // Smooth movement using Lerp
+            books[currentBook].transform.position = Vector3.Lerp(startPosition, targetPosition, timeElapsed);
+            timeElapsed += Time.deltaTime * moveSpeed;  // Increase time for smooth movement
             yield return null;
         }
 
-        transform.position = targetPosition; // Ensure it reaches exactly
+        // Ensure it reaches exactly the target position
+        books[currentBook].transform.position = targetPosition;
         isAtCenter = true;
     }
 
@@ -159,15 +146,13 @@ public class Shelving : MonoBehaviour
     private void OnPublicButtonClick()
     {
         Debug.Log("Public Button Clicked!");
-        // PlayerReputation.Instance.UpdateReputation(bookDataSO.reputationScore);
-
-        GameManager.Instance.ModifyReputation(currDataData[currentBook].publicReputation);
+        GameManager.Instance.ModifyReputation(currDayData[currentBook].publicReputation);
         RemoveBookFromDesk();
         CloseReadableView();  
         currentBook++; // update to the next book
 
-        if(CurrentBook > 3) {
-            CompleteTask("Shelving"); // from here, moving to next scene is handled by HUD
+        if(currentBook > 2) {
+            GameManager.Instance.CompleteTask("Shelving"); // from here, moving to next scene is handled by HUD
         }
     }
 
@@ -180,8 +165,8 @@ public class Shelving : MonoBehaviour
         CloseReadableView(); 
         currentBook++; // update to the next book
 
-        if(CurrentBook > 3) {
-            CompleteTask("Shelving");
+        if(currentBook > 2) {
+            GameManager.Instance.CompleteTask("Shelving");
         }
     }
 

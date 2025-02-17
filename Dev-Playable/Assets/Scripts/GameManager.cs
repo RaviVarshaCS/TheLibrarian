@@ -1,155 +1,127 @@
-using UnityEngine;
-using UnityEngine.SceneManagement;
-using System.Collections.Generic;
+// using System.Collections;
+// using System.Collections.Generic;
+// using UnityEngine;
+// using System;
+// using System.Linq;
+// using UnityEngine.Events;
 
-public class GameManager : MonoBehaviour
-{
-    public static GameManager Instance { get; set; }
+// // TODO
+// // - || ADD EOD STATS ||
+// // - Maybe add intro sequence as its own state?
+// // - add credits state
+// public enum GameState {
+//     MainMenu,
+//     Tutorial,
+//     LibraryWorkday,
+//     MainLibrary,
+//     Ending,
+//     Pause,
+//     Credits
+// }
 
-    // Game state variables
-    public int reputation = 50;          // Initial reputation
-    public int relationship = 50;        // Initial relationship
-    public int currentDay = 0;           // Current day in the game (0-3)
-    private int totalDays = 3;           // Total number of days
-    public List<BookData> booksForToday; // Books for the current day
+// public class GameManager : MonoBehaviour, IDataPersistance
+// {
+//     public static GameManager Instance { get; private set; }
+//     public GameState CurrentState;
 
-    // Task completion tracking
-    public bool shelvingCompleted = false;
-    public bool patronInteractionCompleted = false;
+//     [SerializeField] private SceneLoader sceneLoader;
 
-    void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject); 
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
+//     [Header("Events")]
+//     public GameEvent onGameStateChange;
 
-    void Start()
-    {
-        LoadScene(MainMenu);
-    }
+//     [Header("Game Data")]
+//     [SerializeField] public int CurrentDay;
 
-    // Scene Transitions
-    public void LoadScene(string sceneName)
-    {
-        SceneManager.LoadScene(sceneName);
-    }
+//     // TODO:
+//     // - Add note functionality
+//     //public HashSet<string> collectedNotes = new HashSet<string>();
 
-    public void StartGame()
-    {
-        currentDay = 1;
-        LoadBooksForToday(); 
-        LoadScene("MainLibrary");
-    }
-
-    public void ProceedToNextDay()
-    {
-        if (currentDay < totalDays)
-        {
-            currentDay++;
-            LoadBooksForToday();  
-            ResetDailyTasks();
-            LoadScene("MainLibraryScene");
-        }
-        else
-        {
-            CheckGameEnd();
-        }
-    }
-
-    public int currDay() 
-    {
-        return currentDay;
-
-    }
-
-    // Load books for the current day
-    private void LoadBooksForToday()
-    {
-        booksForToday = BookDatabase.Instance.GetBooksForDay(currentDay);
-    }
+//     [Header("SceneGroup-to-State Mapping")]
+//     [SerializeField] private List<SceneGroupStateMapping> sceneGroupStateMappings;
 
 
-    // Task Completion Check
-    public void CompleteTask(string task)
-    {
-        if (task == "Shelving") shelvingCompleted = true;
-        else if (task == "Patron") patronInteractionCompleted = true;
+//     public GameState GetGameStateForSceneType(string sceneGroupName) {
+//         var mapping = sceneGroupStateMappings.FirstOrDefault(m => m.sceneGroupName == sceneGroupName);
+//         return mapping?.GameState ?? throw new Exception($"No GameState mapped for {sceneGroupName}");
+//     }
 
-        CheckDayCompletion();
-    }
+//     public int GetSceneGroupIndex(GameState gameState) {
+//         var mapping = sceneGroupStateMappings.FirstOrDefault(m => m.GameState == gameState);
+//         return mapping == null ? -1 : sceneGroupStateMappings.IndexOf(mapping);
+//     }
 
-    public void CheckDayCompletion()
-    {
-        // Check if all tasks for the day are completed
-        if (shelvingCompleted && patronInteractionCompleted)
-        {
-            // All tasks done, proceed to next day
-            Invoke("ProceedToNextDay", 2f);
-        }
-    }
+//     private void Awake()
+//     {
+//         if (Instance == null)
+//         {
+//             Instance = this;
+//             DontDestroyOnLoad(gameObject);
+//             // DataPersistanceManager.instance.LoadGame();
+//         }
+//         else
+//         {
+//             Destroy(gameObject);
+//         }
+//     }
 
-    // Reset daily task states
-    public void ResetDailyTasks()
-    {
-        shelvingCompleted = false;
-        patronInteractionCompleted = false;
-    }
+//     private void Start()
+//     {
+//         UpdateGameState(GameState.MainMenu);
+//     }
 
-    // Update Reputation and Relationship values
-    public void ModifyReputation(int amount)
-    {
-        reputation += amount;
-        CheckGameOver(); // Check if game should end due to low reputation
-    }
+//     public async void UpdateGameState(GameState newState)
+//     {
+//         if (newState == CurrentState) return;
 
-    public void ModifyRelationship(int amount)
-    {
-        relationship += amount;
-        CheckGameOver(); // Check if game should end due to low relationship
-    }
+//         Debug.Log($"Changing GameState from {CurrentState} to {newState}.");
 
-    // Check if the game should end based on reputation and relationship
-    private void CheckGameOver()
-    {
-        if (reputation < 30 || relationship < 30)
-        {
-            LoadFailureScene();
-        }
-    }
+//         switch (newState)
+//         {
+//             case GameState.MainMenu:
+//                 //
+//                 break;
+//             case GameState.Tutorial:
+//                 //
+//                 break;
+//             case GameState.LibraryWorkday:
+//                 //
+//                 break;
+//             case GameState.Ending:
+//                 //
+//                 break;
+//             case GameState.Pause:
+//                 //
+//                 break;
+//             case GameState.Credits:
+//                 //
+//                 break;
+//             case GameState.MainLibrary:
+//                 //
+//                 break;
+//             default:
+//                 throw new System.Exception("Invalid game state");
+//         }
 
-    // Game end: Success or Failure
-    private void CheckGameEnd()
-    {
-        if (reputation >= 30 && relationship >= 30)
-        {
-            LoadSuccessScene();
-        }
-        else
-        {
-            LoadFailureScene();
-        }
-    }
+//         await sceneLoader.LoadSceneGroup(GetSceneGroupIndex(newState));
 
-    private void LoadFailureScene()
-    {
-        LoadScene("FailureScene");
-    }
+//         CurrentState = newState;
+//         Debug.Log($"Game State: {CurrentState}");
+//         onGameStateChange.Raise(this, CurrentState);
+//     }
 
-    private void LoadSuccessScene()
-    {
-        LoadScene("SuccessScene");
-    }
+//     public void LoadData(GameData data)
+//     {
+//         this.CurrentDay = data.currentDay;
+//     }
 
-    // Start the game (called from main menu)
-    public void LoadMainMenu()
-    {
-        LoadScene("MainMenuScene");
-    }
-}
+//     public void SaveData(ref GameData data)
+//     {
+//         data.currentDay = this.CurrentDay;
+//     }
+// }
+
+// [System.Serializable]
+// public class SceneGroupStateMapping {
+//     public string sceneGroupName;
+//     public GameState GameState;
+// }

@@ -1,0 +1,15 @@
+To-Do
+[ ] Remove book component from shelving script
+[ ] Update TalkingManager to handle icon notifications
+[ ] Attach the dialogue code 
+[ ] Write a HUD/Persistent UI to manage interactibility
+[ ] Tie all scenes together -> add fade to black between days
+[ ] Add endings (no secret library for now)
+[ ] Update intro visual novel with current script/scenes
+[ ] Upgrade graphics/color palette
+[ ] Add books to read in the library
+[ ] Add posters on walls
+[ ] Add tutorial boxes and informational boxes
+[ ] Add ending info screen
+
+

@@ -9,5 +9,6 @@ public class BookData
     public int publicRelationship;
     public int restrictedRelationship;
     public Sprite[] sprites;  // Book page sprites
-    public string dialogue;   // Dialogue (empty for shelving tasks)
+    public string[] dialogue;   // Dialogue (empty for shelving tasks)
 }
+
