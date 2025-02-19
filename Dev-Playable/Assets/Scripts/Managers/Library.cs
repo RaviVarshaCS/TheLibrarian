@@ -10,7 +10,7 @@ add note open/close functionality here
 figure out timed notifications for talking to patrons (only after shelving scene is done)
 
 check current day completion
-if shelving complete, don't allow move to shelving scene 
+shelving complete, don't allow move to shelving scene if 
 add note data pull in later
 
 FIX DESK CLICKING
@@ -28,7 +28,8 @@ public class Library : MonoBehaviour
 
     void Start() {
         // To-do: Uncomment this when GameManager script is up and running
-        // GameManager.Instance.CheckDayCompletion();
+        GameManager.Instance.CheckDayCompletion();
+        
         targetRenderer = targetObject.GetComponent<Renderer>();
 
         if (targetRenderer != null)
@@ -55,7 +56,10 @@ public class Library : MonoBehaviour
                 if (Input.GetMouseButtonDown(0)) // 0 = Left Click
                 {
                     Debug.Log("Desk Clicked!");
-                    GameManager.Instance.LoadScene("Shelving Task");
+                    if(!GameManager.Instance.shelvingCompleted) {
+                        GameManager.Instance.LoadScene("Shelving Task");
+                    }
+                    
                 }
                 return;
             }

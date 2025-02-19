@@ -10,5 +10,8 @@ public class BookData
     public int restrictedRelationship;
     public Sprite[] sprites;  // Book page sprites
     public string[] dialogue;   // Dialogue (empty for shelving tasks)
+    public string[] giveBook;
+    public string[] dontGiveBook;
+    public GameObject patron; // empty if not talking book
 }
 

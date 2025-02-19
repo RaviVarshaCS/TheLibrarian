@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Shelving Task.unity
     guid: 9f9fd262af0a94e6190abc1ad36ceed2
+  - enabled: 1
+    path: Assets/Scenes/Initial Talk.unity
+    guid: 4cf75749ad2564489931de0972f023c8
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

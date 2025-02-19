@@ -29900,6 +29900,51 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1456434828}
   m_SourcePrefab: {fileID: 100100000, guid: 2fba2e0883e39443295e026b6b6403eb, type: 3}
+--- !u!1 &1960081118
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1960081120}
+  - component: {fileID: 1960081119}
+  m_Layer: 0
+  m_Name: Talking Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1960081119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1960081118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 717c3489d31d14e9996866260a7eb0ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firstTalk: 1
+--- !u!4 &1960081120
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1960081118}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.546867, y: -14.502167, z: 5.469997}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -29909,3 +29954,4 @@ SceneRoots:
   - {fileID: 10842187}
   - {fileID: 1876592406}
   - {fileID: 1066062798}
+  - {fileID: 1960081120}
