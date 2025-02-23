@@ -44,6 +44,9 @@ public class Library : MonoBehaviour
     {
         if (!hoverEnabled || targetRenderer == null) return;
 
+        // Prevent interaction if the mouse is over UI
+        if (EventSystem.current.IsPointerOverGameObject()) return;
+
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
@@ -56,17 +59,15 @@ public class Library : MonoBehaviour
                 if (Input.GetMouseButtonDown(0)) // 0 = Left Click
                 {
                     Debug.Log("Desk Clicked!");
-                    if(!GameManager.Instance.shelvingCompleted) {
+                    if (!GameManager.Instance.shelvingCompleted) {
                         GameManager.Instance.LoadScene("Shelving Task");
                     }
-                    
                 }
                 return;
             }
         }
 
         targetRenderer.material.color = originalColor;
-
     }
 
 }

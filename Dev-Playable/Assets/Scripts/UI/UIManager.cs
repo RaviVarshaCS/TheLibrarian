@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
 
     public Button talk;
     public Button returnToLibrary;
+    public Button ProceedBtn;
     public Button finishDay;
     public Button inventory;
     public Slider reputationSlider;
@@ -43,6 +44,10 @@ public class UIManager : MonoBehaviour
         if (toTalking != null) {
             toTalking.onClick.AddListener(onToTalking);
         }
+
+        if (ProceedBtn != null) {
+            ProceedBtn.onClick.AddListener(OnProceedButton);
+        }
         UpdateUI(); // Initialize UI values
     }
 
@@ -67,18 +72,36 @@ public class UIManager : MonoBehaviour
 
         if (reputationSlider != null)
         {
-            reputationSlider.value = GameManager.Instance.reputation;
+            reputationSlider.value = GameManager.Instance.reputation / 100f;
         }
 
         if (relationshipSlider != null)
         {
-            relationshipSlider.value = GameManager.Instance.relationship;
+            relationshipSlider.value = GameManager.Instance.relationship / 100f;
         }
+
+
+        if(GameManager.Instance.shelvingCompleted && SceneManager.GetActiveScene().name == "Shelving Task") {
+            returnToLibrary.gameObject.SetActive(true);
+        } else if(GameManager.Instance.patronInteractionCompleted && SceneManager.GetActiveScene().name == "Initial Talk") {
+            returnToLibrary.gameObject.SetActive(true);
+        } else {
+            returnToLibrary.gameObject.SetActive(false);
+        }
+
+        if(GameManager.Instance.dayComplete && SceneManager.GetActiveScene().name == "Library") { 
+            ProceedBtn.gameObject.SetActive(true);
+        } else {
+            ProceedBtn.gameObject.SetActive(false);
+        }
+
+        // fix any repeated calls here that effect performance later
+        
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == "Main Menu" || scene.name == "FailureScene") // Adjust for failure scenes
+        if (scene.name == "Main Menu" || scene.name == "Failure") // Adjust for failure scenes
         {
             gameObject.SetActive(false);
         }
@@ -92,4 +115,10 @@ public class UIManager : MonoBehaviour
     {
         GameManager.Instance.LoadScene("Library");
     }
+
+    public void OnProceedButton() {
+        GameManager.Instance.ProceedToNextDay();
+    }
+
+    
 }

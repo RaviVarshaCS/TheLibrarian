@@ -74,13 +74,16 @@ public class Talking : MonoBehaviour
         }
         else
         {
+            isDialogueActive = false;
+            dialoguePanel.SetActive(false);
+
             if(!finishedReading) {
-                isDialogueActive = false;
-                dialoguePanel.SetActive(false);
+                
                 OpenReadableView();
             } else {
                 if(currentBook == 0) {
                     TalkingManager.Instance.finishedFirstTalk();
+
                 } else {
                     GameManager.Instance.CompleteTask("Patron");
                     
@@ -143,4 +146,5 @@ public class Talking : MonoBehaviour
             isAtCenter = false;
         }
     }
+    
 }

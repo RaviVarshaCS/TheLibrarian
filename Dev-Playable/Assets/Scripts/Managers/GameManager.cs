@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using System.Collections;
+using UnityEngine.UI; 
 
 public class GameManager : MonoBehaviour
 {
@@ -16,6 +18,11 @@ public class GameManager : MonoBehaviour
     // Task completion tracking
     public bool shelvingCompleted = false;
     public bool patronInteractionCompleted = false;
+    public bool dayComplete = false;
+
+    public Image fadeImage;
+    public float fadeDuration = 1f;
+
 
     void Awake()
     {
@@ -33,7 +40,9 @@ public class GameManager : MonoBehaviour
 
     // void Start()
     // {
-    //     LoadScene("Main Menu");
+        
+
+    //     // LoadScene("Main Menu");
     // }
 
     // Scene Transitions
@@ -54,9 +63,11 @@ public class GameManager : MonoBehaviour
         if (currentDay < totalDays)
         {
             currentDay++;
+            dayComplete = false;
             LoadBooksForToday();  
             ResetDailyTasks();
-            LoadScene("Library");
+            // LoadScene("Library");
+            FadeToScene("Library");
         }
         else
         {
@@ -92,7 +103,8 @@ public class GameManager : MonoBehaviour
         if (shelvingCompleted && patronInteractionCompleted)
         {
             // All tasks done, proceed to next day
-            Invoke("ProceedToNextDay", 2f);
+            // Invoke("ProceedToNextDay", 2f);
+            dayComplete = true;
         }
     }
 
@@ -128,7 +140,7 @@ public class GameManager : MonoBehaviour
     // Game end: Success or Failure
     private void CheckGameEnd()
     {
-        if (reputation >= 30 && relationship >= 30)
+        if (reputation >= 20 && relationship >= 20)
         {
             LoadSuccessScene();
         }
@@ -140,7 +152,7 @@ public class GameManager : MonoBehaviour
 
     private void LoadFailureScene()
     {
-        LoadScene("FailureScene");
+        FadeToScene("Failure");
     }
 
     private void LoadSuccessScene()
@@ -152,5 +164,65 @@ public class GameManager : MonoBehaviour
     public void LoadMainMenu()
     {
         LoadScene("Library");
+    }
+
+    public void FadeToScene(string sceneName)
+    {
+        // if (fadeImage == null)
+        // {
+        //     Debug.LogError("fadeImage is not assigned!");
+        //     return;
+        // }
+
+        fadeImage.gameObject.SetActive(true);
+        fadeImage.color = new Color(0, 0, 0, 0); // Start as transparent
+        StartCoroutine(FadeOutIn(sceneName));
+    }
+
+    private IEnumerator FadeOutIn(string sceneName)
+    {
+        // Fade out
+        yield return StartCoroutine(Fade(1f));
+        
+        // Load the next scene asynchronously
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
+        
+        // Wait until the scene is fully loaded
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+
+        // Fade in
+        yield return StartCoroutine(Fade(0f));
+    }
+
+    private IEnumerator Fade(float targetAlpha)
+    {
+        float currentAlpha = fadeImage.color.a;
+        float timeElapsed = 0f;
+
+        while (timeElapsed < fadeDuration)
+        {
+            float alpha = Mathf.Lerp(currentAlpha, targetAlpha, timeElapsed / fadeDuration);
+            fadeImage.color = new Color(0, 0, 0, alpha);
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        fadeImage.color = new Color(0, 0, 0, targetAlpha); // Ensure the final alpha is exact
+    }
+
+    public void resetGame() 
+    {
+        reputation = 50;
+        relationship = 50;
+        currentDay = 0;
+
+        shelvingCompleted = false;
+        patronInteractionCompleted = false;
+        dayComplete = false;
+
+        FadeToScene("Main Menu");
     }
 }
