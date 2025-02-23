@@ -2286,6 +2286,204 @@ MonoBehaviour:
     - "You: I\u2019m afraid I can\u2019t give you this book."
     - 'Shohei: H-Huh? B-B-But, why not? What k-kind of-'
     patron: {fileID: 0}
+  - bookName: Day 2 Shelving 1
+    publicReputation: 10
+    restrictedReputation: -10
+    publicRelationship: 10
+    restrictedRelationship: -10
+    sprites:
+    - {fileID: 21300000, guid: 4768fa205a30246ed944edf9eb1c7703, type: 3}
+    - {fileID: 21300000, guid: e7394bb2f26fd48d686480db4b3a1bf7, type: 3}
+    dialogue:
+    - "Shohei: H-Hey\u2026 I need help getting this b-b-book. Please, I r-r-really
+      need this book."
+    giveBook:
+    - 'You: Um... here you go?'
+    - 'Shohei: R-Really? Thank y-'
+    dontGiveBook:
+    - "You: I\u2019m afraid I can\u2019t give you this book."
+    - 'Shohei: H-Huh? B-B-But, why not? What k-kind of-'
+    patron: {fileID: 0}
+  - bookName: Day 2 Shelving 2
+    publicReputation: 10
+    restrictedReputation: -10
+    publicRelationship: 10
+    restrictedRelationship: -10
+    sprites:
+    - {fileID: 21300000, guid: bea6f8752be874ba3992f51a44068b92, type: 3}
+    - {fileID: 21300000, guid: c9676c4270c814035b0ace985010e4ca, type: 3}
+    dialogue:
+    - "Shohei: H-Hey\u2026 I need help getting this b-b-book. Please, I r-r-really
+      need this book."
+    giveBook:
+    - 'You: Um... here you go?'
+    - 'Shohei: R-Really? Thank y-'
+    dontGiveBook:
+    - "You: I\u2019m afraid I can\u2019t give you this book."
+    - 'Shohei: H-Huh? B-B-But, why not? What k-kind of-'
+    patron: {fileID: 0}
+  - bookName: Day 2 Shelving 3
+    publicReputation: 10
+    restrictedReputation: -10
+    publicRelationship: 10
+    restrictedRelationship: -10
+    sprites:
+    - {fileID: 21300000, guid: 71545238161bb40c4abb800223628030, type: 3}
+    - {fileID: 21300000, guid: ef09c7cdcd303441a882752d0ccd843f, type: 3}
+    dialogue:
+    - "Shohei: H-Hey\u2026 I need help getting this b-b-book. Please, I r-r-really
+      need this book."
+    giveBook:
+    - 'You: Um... here you go?'
+    - 'Shohei: R-Really? Thank y-'
+    dontGiveBook:
+    - "You: I\u2019m afraid I can\u2019t give you this book."
+    - 'Shohei: H-Huh? B-B-But, why not? What k-kind of-'
+    patron: {fileID: 0}
+  - bookName: Day 2 Talking 1
+    publicReputation: 10
+    restrictedReputation: -10
+    publicRelationship: 10
+    restrictedRelationship: -10
+    sprites:
+    - {fileID: 21300000, guid: 71545238161bb40c4abb800223628030, type: 3}
+    - {fileID: 21300000, guid: ef09c7cdcd303441a882752d0ccd843f, type: 3}
+    dialogue:
+    - 'Takeo: Good afternoon young lady, I was hoping to check out this book, my
+      students have been raving about it recently.'
+    giveBook:
+    - 'You: Certainly! Enjoy your reading.'
+    - 'Takeo: Thank you!'
+    dontGiveBook:
+    - "You: Oh, I apologize sir. I\u2019m afraid this book is not available for the
+      public. Is there another book I can get you?"
+    - 'Takeo: I appreciate your courtesy, but no. Thank you for the help.'
+    - "Takeo: Of course, let me know if there\u2019s anything else I can do for you.
+      *Takeo leaves*"
+    patron: {fileID: 0}
+  - bookName: Day 2 Talking 2
+    publicReputation: 10
+    restrictedReputation: -10
+    publicRelationship: 10
+    restrictedRelationship: -10
+    sprites:
+    - {fileID: 21300000, guid: ee7736ed9de2c4acc82835a69918d99f, type: 3}
+    - {fileID: 21300000, guid: 6081a694cccf449b0a6d5387f87b4427, type: 3}
+    dialogue:
+    - 'You: Hello sir, how may I help you?'
+    - "You: *thinking* He\u2019s\u2026 kinda scary."
+    - 'Ryu: I want this book.'
+    giveBook:
+    - "You: Er\u2026 sure, here you go."
+    - 'Ryu: Tch, about time. Thanks. *leaves*'
+    - 'You: *thinking* He was so intimidating.'
+    dontGiveBook:
+    - "You: I apologize, but I can\u2019t give you this book. If there\u2019s another
+      book you\u2019re interested in, I could look into that."
+    - "Ryu: Hah? Why not? It\u2019s just a book anyway."
+    - "You: I really am sorry, it\u2019s the rule."
+    - 'Ryu: Tch, of course it is. Whatever. *leaves*'
+    patron: {fileID: 0}
+  - bookName: Day 3 Shelving 1
+    publicReputation: 10
+    restrictedReputation: -10
+    publicRelationship: 10
+    restrictedRelationship: -10
+    sprites:
+    - {fileID: 21300000, guid: 43a2ac9a436f34c7287bed5258ce6086, type: 3}
+    - {fileID: 21300000, guid: 5127cce44307f40df97c35ee0e05cfc0, type: 3}
+    dialogue:
+    - "Shohei: H-Hey\u2026 I need help getting this b-b-book. Please, I r-r-really
+      need this book."
+    giveBook:
+    - 'You: Um... here you go?'
+    - 'Shohei: R-Really? Thank y-'
+    dontGiveBook:
+    - "You: I\u2019m afraid I can\u2019t give you this book."
+    - 'Shohei: H-Huh? B-B-But, why not? What k-kind of-'
+    patron: {fileID: 0}
+  - bookName: Day 3 Shelving 2
+    publicReputation: 10
+    restrictedReputation: -10
+    publicRelationship: 10
+    restrictedRelationship: -10
+    sprites:
+    - {fileID: 21300000, guid: f7f1676ad07b44b2a8df1c37ccd1a0fb, type: 3}
+    - {fileID: 21300000, guid: 621d95df454034bc88c87eb65378c8de, type: 3}
+    dialogue:
+    - "Shohei: H-Hey\u2026 I need help getting this b-b-book. Please, I r-r-really
+      need this book."
+    giveBook:
+    - 'You: Um... here you go?'
+    - 'Shohei: R-Really? Thank y-'
+    dontGiveBook:
+    - "You: I\u2019m afraid I can\u2019t give you this book."
+    - 'Shohei: H-Huh? B-B-But, why not? What k-kind of-'
+    patron: {fileID: 0}
+  - bookName: Day 3 Shelving 3
+    publicReputation: 10
+    restrictedReputation: -10
+    publicRelationship: 10
+    restrictedRelationship: -10
+    sprites:
+    - {fileID: 21300000, guid: c9d7f86ca284044f3bcd37e9e791a2a9, type: 3}
+    - {fileID: 21300000, guid: 18faf1f55bbe84b1d9e7a8f1052affe5, type: 3}
+    dialogue:
+    - "Shohei: H-Hey\u2026 I need help getting this b-b-book. Please, I r-r-really
+      need this book."
+    giveBook:
+    - 'You: Um... here you go?'
+    - 'Shohei: R-Really? Thank y-'
+    dontGiveBook:
+    - "You: I\u2019m afraid I can\u2019t give you this book."
+    - 'Shohei: H-Huh? B-B-But, why not? What k-kind of-'
+    patron: {fileID: 0}
+  - bookName: Day 4 Shelving 1
+    publicReputation: 10
+    restrictedReputation: -10
+    publicRelationship: 10
+    restrictedRelationship: -10
+    sprites:
+    - {fileID: 21300000, guid: ee7736ed9de2c4acc82835a69918d99f, type: 3}
+    - {fileID: 21300000, guid: 6081a694cccf449b0a6d5387f87b4427, type: 3}
+    dialogue:
+    - 'You: Hello sir, how may I help you?'
+    - "You: *thinking* He\u2019s\u2026 kinda scary."
+    - 'Ryu: I want this book.'
+    giveBook:
+    - "You: Er\u2026 sure, here you go."
+    - 'Ryu: Tch, about time. Thanks. *leaves*'
+    - 'You: *thinking* He was so intimidating.'
+    dontGiveBook:
+    - "You: I apologize, but I can\u2019t give you this book. If there\u2019s another
+      book you\u2019re interested in, I could look into that."
+    - "Ryu: Hah? Why not? It\u2019s just a book anyway."
+    - "You: I really am sorry, it\u2019s the rule."
+    - 'Ryu: Tch, of course it is. Whatever. *leaves*'
+    patron: {fileID: 0}
+  - bookName: Day 4 Shelving 2
+    publicReputation: 10
+    restrictedReputation: -10
+    publicRelationship: 10
+    restrictedRelationship: -10
+    sprites:
+    - {fileID: 21300000, guid: ee7736ed9de2c4acc82835a69918d99f, type: 3}
+    - {fileID: 21300000, guid: 6081a694cccf449b0a6d5387f87b4427, type: 3}
+    dialogue:
+    - 'You: Hello sir, how may I help you?'
+    - "You: *thinking* He\u2019s\u2026 kinda scary."
+    - 'Ryu: I want this book.'
+    giveBook:
+    - "You: Er\u2026 sure, here you go."
+    - 'Ryu: Tch, about time. Thanks. *leaves*'
+    - 'You: *thinking* He was so intimidating.'
+    dontGiveBook:
+    - "You: I apologize, but I can\u2019t give you this book. If there\u2019s another
+      book you\u2019re interested in, I could look into that."
+    - "Ryu: Hah? Why not? It\u2019s just a book anyway."
+    - "You: I really am sorry, it\u2019s the rule."
+    - 'Ryu: Tch, of course it is. Whatever. *leaves*'
+    patron: {fileID: 0}
 --- !u!4 &976242354
 Transform:
   m_ObjectHideFlags: 0

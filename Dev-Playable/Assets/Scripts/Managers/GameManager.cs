@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public int reputation = 50;          // Initial reputation
     public int relationship = 50;        // Initial relationship
     public int currentDay = 0;           // Current day in the game (0-3)
-    private int totalDays = 3;           // Total number of days
+    private int totalDays = 2;           // Total number of days
     public List<BookData> booksForToday; // Books for the current day
 
     // Task completion tracking
@@ -157,7 +157,7 @@ public class GameManager : MonoBehaviour
 
     private void LoadSuccessScene()
     {
-        LoadScene("SuccessScene");
+        FadeToScene("Success");
     }
 
     // Start the game (called from main menu)
@@ -211,6 +211,7 @@ public class GameManager : MonoBehaviour
         }
 
         fadeImage.color = new Color(0, 0, 0, targetAlpha); // Ensure the final alpha is exact
+        fadeImage.gameObject.SetActive(false);
     }
 
     public void resetGame() 

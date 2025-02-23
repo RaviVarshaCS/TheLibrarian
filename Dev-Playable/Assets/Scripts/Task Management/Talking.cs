@@ -86,6 +86,7 @@ public class Talking : MonoBehaviour
 
                 } else {
                     GameManager.Instance.CompleteTask("Patron");
+                    TalkingManager.Instance.firstTalk = true;
                     
                 }
                 
